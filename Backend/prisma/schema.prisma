@@ -39,9 +39,13 @@ model Tarea {
   titulo           String
   descripcion      String
   prioridad        String
-  estado           String
-  fechaVencimiento DateTime?
-  completada       Boolean  @default(false)
+  estado           EstadoTarea @default(PENDIENTE)
   createdAt        DateTime @default(now())
   updatedAt        DateTime @updatedAt
+}
+
+enum EstadoTarea {
+  COMPLETADA
+  PROCESO
+  PENDIENTE
 }
