@@ -7,18 +7,41 @@ datasource db {
   url      = env("POSTGRES_URL")
 }
 
-model User {
+model Usuario {
   id        String   @id @unique @default(uuid())
   nombre    String
   password  String
   email     String   @unique
-  rol       RolUser  @default(ESTUDIANTE)
+  rol       RolUsuario  @default(ESTUDIANTE)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-enum RolUser {
+enum RolUsuario {
   ESTUDIANTE
   DOCENTE
   ADMIN
+}
+
+model Proyecto {
+  id          String   @id @default(uuid())
+  titulo      String
+  descripcion String
+  asignatura  String
+  url         String
+  publicado   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Tarea {
+  id               String   @id @default(uuid())
+  titulo           String
+  descripcion      String
+  prioridad        String
+  estado           String
+  fechaVencimiento DateTime?
+  completada       Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 }
